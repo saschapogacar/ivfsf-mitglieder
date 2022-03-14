@@ -26,7 +26,8 @@ function ivfsf_profile_list_handler_function( $atts, $content, $tag ){
     ));
     
     //var_dump($query);
-
+if($query->have_posts()){	
+	$result = '<div class="ivfsf">';
     while ($query->have_posts()) {
         $post = $query->the_post();
         $post_id = get_the_ID();
@@ -44,16 +45,15 @@ function ivfsf_profile_list_handler_function( $atts, $content, $tag ){
             <div class="vita">'.$vita.'</div>
             <div><a class="button" href="'.$guid.'">'.'zum Profil'.'</a></div>
             </div>'; 
+	    }else {
+      $result = '<div class=""> Keine Mitgliederprofile </div>'; 
+}
+   $result .= '</div>';
     }
 
-	if (strlen($result) <= 1) {
-        $result = '<div class=""> Keine Mitgliederprofile </div>'; 
-    }
-
-    $result = '<div class="ivfsf">'.$result.'</div>';
 
 
-   // echo $result;
+
 
     wp_reset_query();
     wp_reset_postdata();
